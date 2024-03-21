@@ -2,12 +2,13 @@ const Product = require('../model/productModel');
 
 exports.getAllproduct = async (req, res) => {
     try {
-        // const id = req.params;
+        const brand = req.body;
+        console.log(brand,"= kkk");
         const products = await Product.find();
-
+        console.log(products,"=jkl");
         res.status(200).json({
             status: "Success",
-            length : products.length,
+            // length : products.length,
             Data: {
                 products
             }
@@ -26,7 +27,7 @@ exports.createProduct = async (req, res) => {
     try {
         console.log("abc");
         const newProduct = await Product.create(req.body);
-        console.log("abcdfg");
+        // console.log("abcdfg");
 
         console.log(newProduct);
         res.status(200).json({
@@ -69,7 +70,7 @@ exports.deleteProduct = async (req, res) => {
         const productDelete = await Product.findByIdAndDelete(req.params.id);
         res.status(204).json({
             status: "Success",
-            message: "deleteProduct is  Successfuly"
+            message: "delete Product is  Successfuly"
         })
     } catch (error) {
         res.status(404).json({
@@ -78,3 +79,5 @@ exports.deleteProduct = async (req, res) => {
         })
     }
 }
+
+// Create  all category //

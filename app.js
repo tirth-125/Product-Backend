@@ -1,6 +1,7 @@
 const express = require("express");
 const UserRouter = require("./routes/authrouter");
 const ProductRouter = require("./routes/productRouter");
+const CategoryRouter = require("./routes/categoryrouter");
 const cors = require("cors");
 
 const app = express();
@@ -24,5 +25,7 @@ const allowedOrigins = ['*'];
 app.use(express.json());
 app.use('/api/v1/product', ProductRouter);
 app.use('/api/v1/users', UserRouter);
+app.use('/api/product', CategoryRouter);
+
 
 module.exports = app;

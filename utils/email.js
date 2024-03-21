@@ -18,13 +18,7 @@ const sendemail = async ({ email, message, subject }) => {
             to: email,
             subject: subject,
             text: message
-            // content: {
-            //     if(content = forgotpassword) {
-            //         message
-            //     }, if(content = SignupOtp) {
-            //         message
-            //     }
-            // },
+            
         }
         await transporter.sendMail(emailoption);
     } catch (error) {
