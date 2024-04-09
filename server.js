@@ -14,5 +14,5 @@ mongoose.connect(process.env.CONN_STR,
 
 const port = process.env.port || 3000;
 app.listen(port, (req, res) => {
-    console.log(`Server Started in ${process.env.port}`);
+    console.log(`Server Started in ${https://product-backend-bnzz.onrender.com}`);
 }); 
