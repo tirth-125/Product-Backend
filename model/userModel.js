@@ -44,14 +44,18 @@ const userSchema = mongoose.Schema({
     },
     passwordResetToken : String,
     passwordResetTokenExpire : Date,
-    otp : {type: Number}  
+    otp : {type: Number},
+    cart : [{
+        productId: {type : mongoose.Schema.Types.ObjectId, ref: 'Product'},
+        count : {type : Number}
+    }]
 });
 
 userSchema.pre('save', async function(next) {
     if (!this.isModified('password')) return next();
 
     //Password is Convert palintext to ciphertext  
-    this.password = await bcrypt.hash(this.password, 12);
+    this.password = bcrypt.hash(this.password, 12);
     // console.log(this.password);
 
     this.confirmPassword = undefined;

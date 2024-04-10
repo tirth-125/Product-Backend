@@ -12,6 +12,8 @@ router.route('/login').post(AuthController.login);
 router.route('/logout').post(AuthController.logout);
 router.route('/forgotPassword').post(AuthController.forgotPassword);
 router.route('/resetPassword/:token').patch(AuthController.resetPassword);
+router.route('/cart/:email').post(AuthController.cartItem);
+
 
 
 module.exports = router;

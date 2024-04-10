@@ -370,9 +370,9 @@ exports.createOtp = async (req, res, next) => {
         const user = await User.create({ email, otp });
         const message = `Your OTP is ${otp}`;
         await sendemail({
-            email : user.email,
-            subject : "Your OTP",
-            message : message
+            email: user.email,
+            subject: "Your OTP",
+            message: message
         });
         res.status(200).json({
             success: true,
@@ -382,8 +382,42 @@ exports.createOtp = async (req, res, next) => {
         });
     } catch (error) {
         res.status(400).json({
-            success : false,
-            message : error.message
+            success: false,
+            message: error.message
+        });
+    }
+}
+
+exports.cartItem = async (req, res) => {
+    try {
+        const { email } = req.params;
+        const { productId, quantity = 1 } = req.body;
+        const cartUser = await User.findOne({ email }).populate('cart.productId');
+        if (!cartUser) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        const existCartItem = cartUser.cart.find(item => item.productId.toString() === productId);
+        if (existCartItem) {
+            existCartItem.count += quantity ;
+        }else{
+            cartUser.cart.push({ productId, count: quantity });
+        }
+        
+        let totalCount = cartUser.cart.reduce((total, item) => total + item.count, 0);
+        
+        cartUser.otp = undefined;
+        res.status(200).json({
+            success: true,
+            data: {
+                cartUser
+            },
+            totalCount
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error"
         });
     }
 }
