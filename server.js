@@ -30,4 +30,4 @@ const port = process.env.PORT || 3000;
 
 app.listen(port,process.env.HOST, (req, res) => {
     console.log(`Server Started in ${process.env.HOST}:${port}`);
-}); 
+});  
