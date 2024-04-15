@@ -2,37 +2,6 @@ const mongoose = require("mongoose");
 const { stringify } = require("querystring");
 
 
-// const smartPhoneSchema = new mongoose.Schema({
-//     title : {
-//         type : String,
-//         required : [true,"title is required field"]
-//     },
-//     description : {
-//         type  : String,
-       
-//     },
-//     price : {
-//         type : Number,
-     
-//     },
-//     discountPercentage : {
-//         type : Number
-//     },
-//     rating : {
-//         type : Number,
-        
-//     },
-//     brand  : {
-//         type : String,
-        
-    
-//     },
-//     category : {
-//         type : String,
-        
-//     },
-    
-// })
 const productSchema = new mongoose.Schema({
 id : {
     type : Number,
@@ -78,8 +47,6 @@ images : {
 });
 
 const Product =  mongoose.model('Product',productSchema);
-// const smartPhone =  mongoose.model('smartPhone',smartPhoneSchema);
-
 
 module.exports = Product
      

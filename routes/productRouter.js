@@ -52,7 +52,7 @@ const router = express.Router();
 
 
 // Axios Route
-router.route('/getCrete').post(ProductController.getProduct);
+// router.route('/getCrete').post(ProductController.getProduct);
 // router.route('/newproduct').post(ProductController.newProduct);
 
 // router.route('/').get(ProductController.getAllproduct);

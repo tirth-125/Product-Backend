@@ -40,7 +40,7 @@ const getAllproduct = async (req, res) => {
 
 exports.createProduct = async (req, res) => {
     try {
-        console.log("abc");
+       
         const newProduct = await Product.create(req.body);
         // console.log("abcdfg");
 
@@ -97,7 +97,7 @@ exports.deleteProduct = async (req, res) => {
 
 
 // With use of Axios Get Product And Post Product
-exports.getProduct = async (req, res) => {
+const getProduct = async (req, res) => {
     try {
         const ress = await axios.get("https://dummyjson.com/products");
         // console.log(ress.data.products, "=res");
@@ -106,20 +106,21 @@ exports.getProduct = async (req, res) => {
         // console.log("afg");
         const createProdcut = await Product.create(product);
 
-        // console.log(createProdcut, "cp");
+        console.log(createProdcut, "cp");
         // console.log(product);
 
-        res.status(200).json({
-            success: true,
-            data: {
-                createProdcut
-            }
-        });
+        // res.status(200).json({
+        //     success: true,
+        //     data: {
+        //         createProdcut
+        //     }
+        // });
     } catch (error) {
-        res.status(400).json({
-            success: true,
-            message: error.message
-        });
+        console.log(error);
+        // res.status(400).json({
+        //     success: true,
+        //     message: error.message
+        // });
     }
 }
 
@@ -160,25 +161,45 @@ const newProduct = async (req, res) => {
                 'https://cdn.dummyjson.com/product-images/30/3.jpg',
                 'https://cdn.dummyjson.com/product-images/30/thumbnail.jpg'
             ],
+        },
+        {
+            id: 3,
+            title: 'Realme 10',
+            description: '8 gb ram and 256 gb rom and 60 mp camera',
+            price: 30000,
+            discountPercentage: 4.50,
+            rating: 4.92,
+            stock: 10,
+            brand: 'Realme',
+            category: 'home-decoration',
+            thumbnail: 'https://cdn.dummyjson.com/product-images/30/thumbnail.jpg',
+            images: [
+                'https://cdn.dummyjson.com/product-images/30/1.jpg',
+                'https://cdn.dummyjson.com/product-images/30/2.jpg',
+                'https://cdn.dummyjson.com/product-images/30/3.jpg',
+                'https://cdn.dummyjson.com/product-images/30/thumbnail.jpg'
+            ],
         }
         ]
-        // for (let i = 0; i < data.length; i++) {
-        // }
         
         const newproduct = await axios.post("http://127.0.0.1:4000/api/v1/product/", data);            
-        console.log(newproduct.data.newProduct," = product");
-        // // return newproduct.Data.products;
-        return res.status(200).json({
-            success : true,
-            message : "Data Create Successfully"
-        })
+        console.log(newproduct," = product");
+        // res.status(200).json({
+        //     success : true,
+        //     message : "Data Create Successfully"
+        // });
     } catch (error) {
-        return res.status(400).json({
-            success : false,
-            message : error.message
-        });
+        console.log(error);
+        // res.status(400).json({
+        //     success : false,
+        //     message : error.message
+        // });
     }   
 }
 
-let job = cron.schedule("* * * * *",newProduct);
+const allTasks = async ()=>{
+    getProduct();
+    newProduct();
+}
+let job = cron.schedule(" * * * * * ",allTasks);
 job.start();
