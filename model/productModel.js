@@ -34,6 +34,10 @@ const { stringify } = require("querystring");
     
 // })
 const productSchema = new mongoose.Schema({
+id : {
+    type : Number,
+    require : true
+},
 title : {
     type : String,
     required : [true,"title is required field"]
